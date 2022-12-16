@@ -11,7 +11,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const netType = process.env.NET_TYPE
   const perName = process.env.PER_NAME
   const contracts = netType === 'dev' ? dev : prod
-  const fee = process.env.FEE
+  const fee = Number(process.env.FEE)
   console.log('nettype: ', netType)
   console.log('contracts: ', contracts)
   console.log('fee: ', fee)
@@ -34,7 +34,8 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   console.log('args: ', args)
   const deploymentFee = await deployer.estimateDeployFee(contractFactory, args);
   const parsedFee = ethers.utils.formatEther(deploymentFee.toString());
-  if (Number(parsedFee) >= 0.3) {
+  console.log('parsed fee: ', parsedFee)
+  if (Number(parsedFee) >= fee) {
     console.log('too much fee, revert!')
     return
   }
