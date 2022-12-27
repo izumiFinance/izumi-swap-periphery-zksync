@@ -10,7 +10,7 @@ contract TestToken is ERC20, Ownable {
     constructor(string memory _name, string memory _symbol, uint8 _decimal)
         ERC20(_name, _symbol)
     {
-        _mint(msg.sender, 10000000000000000000000000000);
+        _mint(msg.sender, 1000000000000000000000000000000);
         decimal=_decimal;
     }
 
